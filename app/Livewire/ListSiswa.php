@@ -9,10 +9,10 @@ class ListSiswa extends Component
 {
     public $kelas;
     public $siswaList = [];
-    public function mount($kelasId)
+    public function mount()
     {
-        $this->kelas = Kelas::with('siswa')->findOrFail($kelasId);
-        $this->siswaList = $this->kelas->siswa;
+        $this->kelas = Kelas::with('siswa')->get();
+        $this->siswaList = $this->kelas->pluck('siswa')->flatten();
     }
     public function render()
     {

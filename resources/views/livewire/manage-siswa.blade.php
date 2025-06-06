@@ -1,5 +1,9 @@
 <div>
-    <h1 class="font-medium text-xl px-3 py-2 bg-gray-300 rounded-md">Manage Siswa</h1>
+    <div class="absolute">
+        @livewire('component.navbar')
+    </div>
+    <div x-data :class="$store.sidebar.open ? 'ml-56' : 'ml-20'" class="p-5">
+        <h1 class="font-medium text-xl px-3 py-2 bg-gray-300 rounded-md">Manage Siswa</h1>
         <form wire:submit.prevent="{{ $editID ? 'update' : 'store' }}" class="my-10">
             <div class="h-16 border-b border-gray-500">
                 <input type="text" wire:model="nama" placeholder="Nama" class="border border-gray-300 focus:border focus border-gray-700 transition-all duration-300 rounded-md py-1 px-1">
@@ -29,9 +33,9 @@
                 <tbody>
                     @foreach ($siswa as $siswas)
                         <tr class="bg-white border-b bg-gray-500 border-gray-700">
-                            <td class="px-6 py-4">{{ $siswas->nama }}</td>
-                            <td class="px-6 py-4">{{ $siswas->nis }}</td>
-                            <td class="px-6 py-4">{{ $siswas->kelas->nama_kelas ?? '-' }}</td>
+                            <td class="px-6 py-4 text-black">{{ $siswas->nama }}</td>
+                            <td class="px-6 py-4 text-black">{{ $siswas->nis }}</td>
+                            <td class="px-6 py-4 text-black">{{ $siswas->kelas->nama_kelas ?? '-' }}</td>
                             <td>
                                 <button wire:click="edit({{ $siswas->id }})" class="px-2 py-1 bg-blue-500 rounded-md">Edit</button>
                                 <button wire:click="delete({{ $siswas->id }})" class="px-2 py-1 bg-blue-500 rounded-md">Hapus</button>
@@ -41,4 +45,5 @@
                 </tbody>
             </table>
         </div>
+    </div>
 </div>

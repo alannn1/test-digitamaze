@@ -15,19 +15,18 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 Route::group(['middleware' => 'auth'], function() {
-    Route::get('/dashboard', Dashboard::class)->name('dashboard');
     // Kelas
     Route::get('/kelas', ManageKelas::class)->name('kelas');
     Route::get('/kelas-list', ListKelas::class)->name('kelas.list');
 
     // Siswa
     Route::get('/siswa', ManageSiswa::class)->name('siswa');
-    Route::get('/siswa-list/{kelasId}', ListSiswa::class)->name('siswa.list');
+    Route::get('/siswa-list', ListSiswa::class)->name('siswa.list');
 
     // Guru
     Route::get('/guru', ManageGuru::class)->name('guru');
-    Route::get('/guru-list/{kelasId}', ListGuru::class)->name('guru.list');
+    Route::get('/guru-list', ListGuru::class)->name('guru.list');
 });
 
 // Authentication
-Route::get('/', Login::class)->name('login');
+Route::get('/', Login::class)->name('login')->middleware('guest');

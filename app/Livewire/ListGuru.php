@@ -9,10 +9,10 @@ class ListGuru extends Component
 {
     public $kelas;
     public $guruList = [];
-    public function mount($kelasId)
+    public function mount()
     {
-        $this->kelas = Kelas::with('guru')->findOrFail($kelasId);
-        $this->guruList = $this->kelas->guru;
+        $this->kelas = Kelas::with('guru')->get();
+        $this->guruList = $this->kelas->pluck('guru')->flatten();
     }
     public function render()
     {

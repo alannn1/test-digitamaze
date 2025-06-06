@@ -1,32 +1,33 @@
-<div>
-    <div class="w-full h-14 border-b border-gray-300 flex items-center pl-5 shadow-md">
-        <a href="{{ route('dashboard') }}" class="flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M244 400L100 256l144-144M120 256h292"/></svg>
-            <span class="text-lg font-medium ml-3">Kembali</span>
-        </a>
+<div class="w-full flex">
+    <div class="absolute">
+        @livewire('component.navbar')
     </div>
-    <div class="w-full flex p-5">
-        <span class="text-xl font-bold">Daftar Semua Kelas</span>
-    </div>
-    <div class="w-full relative overflow-x-auto px-5">
-        <table class="w-full text-sm text-left rtl:text-right text-white">
-            <thead class="text-xs text-gray-400 bg-gray-700 uppercase bg-gray-50">
-                <tr>
-                    <th scope="col" class="px-6 py-3">No</th>
-                    <th scope="col" class="px-6 py-3">Kelas</th>
-                    <th scope="col" class="px-6 py-3">Siswa</th>
-                    <th scope="col" class="px-6 py-3">Guru</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($kelasList as $index => $kelas)
-                    @foreach ($kelas->siswa as $siswas)
-                        <tr class="bg-white border-b bg-gray-500 border-gray-700">
-                            <td>{{ $index + 1 }}</td>
-                            <td class="px-6 py-4">
-                                {{ $kelas->nama_kelas }}
-                            </td>
-                            <td>
+    <div x-data :class="$store.sidebar.open ? 'ml-56' : 'ml-20'" class="w-full p-5">
+        <div class="w-full flex p-5">
+            <h1 class="font-medium text-xl px-3 py-2 bg-gray-300 rounded-md w-full">Daftar Semua Kelas</h1>
+        </div>
+        <div class="w-full relative overflow-x-auto px-5">
+            <table class="w-full text-sm text-left rtl:text-right text-black">
+                <thead class="text-xs text-gray-400 bg-gray-700 uppercase bg-gray-50">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">No</th>
+                        <th scope="col" class="px-6 py-3">Kelas</th>
+                        <th scope="col" class="px-6 py-3">Siswa</th>
+                        <th scope="col" class="px-6 py-3">Guru</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
+                        $no = 1;
+                    @endphp
+                    @foreach ($kelasList as $kelas)
+                        @foreach ($kelas->siswa as $siswas)
+                            <tr class="bg-white border-b bg-gray-500 border-gray-700">
+                                <td>{{ $no++ }}</td>
+                                <td class="px-6 py-4">
+                                    {{ $kelas->nama_kelas }}
+                                </td>
+                                <td>
                                     {{ $siswas->nama }}
                                 </td>
                                 <td class="px-6 py-4">
@@ -37,7 +38,8 @@
                             </tr>
                         @endforeach
                     @endforeach
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

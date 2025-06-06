@@ -9,4 +9,16 @@
     <body>
         {{ $slot }}
     </body>
+
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.store('sidebar', {
+                open: false,
+                toggle() {
+                    this.open = !this.open;
+                }
+            });
+        });
+    </script>
 </html>

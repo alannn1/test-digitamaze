@@ -20,13 +20,16 @@ class Login extends Component
         $this->validate();
         if(Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)){
             session()->regenerate();
-            return redirect()->intended('/dashboard');
+            return redirect()->intended('/kelas');
         }
 
         $this->addError('email', 'Email atau password salah');
     }
     public function render()
     {
+        if(Auth::check()) {
+            return redirect('/kelas');
+        }
         return view('livewire.auth.login');
     }
 }
